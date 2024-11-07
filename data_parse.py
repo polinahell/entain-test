@@ -3,7 +3,7 @@ import pandas as pd
 from sqlalchemy import create_engine
 
 
-data_file_path = r"C:\Users\37259\Desktop\Programming\Entain\entain-test\data\data.log"
+data_file_path = r"C:\Users\37259\Desktop\Programming\entain-test\data\data.log"
 
 with open(data_file_path, 'r') as file:
     data_log = file.read()
@@ -47,7 +47,7 @@ connection.commit()
 cursor.close()
 connection.close()
 
-csv_file_path = r"C:\Users\37259\Desktop\Programming\Entain\entain-test\data\parsed_data.csv"
+csv_file_path = r"C:\Users\37259\Desktop\Programming\entain-test\data\parsed_data.csv"
 data.to_csv(csv_file_path, index=False, header=False)
 
 connection = psycopg2.connect(
