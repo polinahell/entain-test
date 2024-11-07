@@ -1,0 +1,54 @@
+-- Total Bets per User
+SELECT user_id, COUNT(*) AS total_bets
+FROM parsed_data
+WHERE type = 'bet'
+GROUP BY user_id
+ORDER BY total_bets DESC;
+
+Description: Provides a daily summary of the total bet amounts.
+
+
+-- Total Wins per User
+SELECT user_id, COUNT(*) AS total_wins
+FROM parsed_data
+WHERE type = 'win'
+GROUP BY user_id
+ORDER BY total_wins DESC;
+
+Description: Provides a daily summary of the total win amounts.
+
+
+-- Net Profit per User
+SELECT user_id, SUM(CASE WHEN type = 'bet' THEN -amount ELSE amount END) AS net_profit
+FROM parsed_data
+GROUP BY user_id
+ORDER BY net_profit DESC;
+
+Description: This query calculates the net profit per user, showing whether they won or lost overall.
+
+
+-- Daily Total Bets and Wins
+SELECT DATE(timestamp) AS bet_date, 
+       SUM(CASE WHEN type = 'bet' THEN amount ELSE 0 END) AS total_bet_amount,
+       SUM(CASE WHEN type = 'win' THEN amount ELSE 0 END) AS total_win_amount
+FROM parsed_data
+GROUP BY bet_date
+ORDER BY bet_date;
+
+Description: This query calculates daily total bets and wins.
+
+
+-- Average Bet Amount Per User
+SELECT user_id,
+       AVG(CASE WHEN type = 'bet' THEN amount ELSE NULL END) AS avg_bet_amount
+FROM parsed_data
+GROUP BY user_id
+ORDER BY avg_bet_amount DESC;
+
+Description: Calculates the average bet amount for each user.
+
+
+
+
+
+
